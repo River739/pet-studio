@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="script.js"></script>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="book.html">Book Online</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="main.html#reviews">Reviews</a></li>
+                <li>More...</li>
+            </ul>
+        </nav>
+
+        <!-- Canvas Banner -->
+        <canvas id="offerCanvas" width="1000" height="80"></canvas>
+
+    </header>
+
+    <section class="hero" id="hero">
+        <h1>Capture Your Pet’s Best Moments</h1>
+    </section>
+
+    <section class="about">
+        <h1>About Us</h1>
+        <p>At Pet Studio, we believe pets aren’t just animals , they’re family. Every wag, purr, and playful moment tells a story, and our goal is to capture and celebrate that love in the most beautiful way possible.
+        </p>
+    </section>
+
+    <section class="process">
+    <h2>How It Works</h2>
+
+    <div class="steps">
+        <div class="step">
+            <img src="images/pic1.png" alt="Pre Session">
+            <h3>Pre-Session</h3>
+            <p>We understand your pet’s personality and plan the shoot.</p>
+        </div>
+
+        <div class="step">
+            <img src="images/pic2.jpeg" alt="Shoot Day">
+            <h3>Shoot Day</h3>
+            <p>A relaxed, playful shoot to capture real moments.</p>
+        </div>
+
+        <div class="step">
+            <img src="images/pic3.jpeg" alt="Editing">
+            <h3>Editing</h3>
+            <p>Natural edits that enhance without overdoing.</p>
+        </div>
+
+        <div class="step">
+            <img src="images/pic4.jpeg" alt="Delivery">
+            <h3>Delivery</h3>
+            <p>Your memories delivered beautifully and securely.</p>
+        </div>
+    </div>
+</section>
+
+    <section class="Price" id="Price">
+    <table border="1">
+        <tr>
+            <th>Package</th>
+            <th>Duration</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td>Mini Shoot</td>
+            <td>20 min</td>
+            <td>₹5,500</td>
+        </tr>
+        <tr>
+            <td>Full Shoot</td>
+            <td>1 hr</td>
+            <td>₹8,000</td>
+        </tr>
+        <tr>
+            <td>Premium</td>
+            <td>2 hr</td>
+            <td>₹14,000</td>
+        </tr>
+    </table>
+</section>
+
+<section class="reviews" id="reviews">
+    <h1 style="text-align: center;">Hear It From Our Clients</h1>
+    <br>
+    <div class="steps">
+        <div class="step">
+            <img src="images/pic1.png" alt="review1">
+            <h3>DAN</h3>
+            <p>"A calm, patient photoshoot that beautifully captures every pet's unique personality."</p>
+        </div>
+        <div class="step">
+            <img src="images/pic1.png" alt="review2">
+            <h3>SAM</h3>
+            <p>"Professional, stress-free sessions designed around your pet's comfort."</p>
+        </div>
+        <div class="step">
+            <img src="images/pic1.png" alt="review3">
+            <h3>MIKE</h3>
+            <p>"Heartfelt portraits that turn fleeting moments into lasting memories."</p>
+        </div>
+        <div class="step">
+            <img src="images/pic1.png" alt="review4">
+            <h3>KRIS</h3>
+            <p>"Where genuine care meets timeless pet photography."</p>
+        </div>
+    </div>
+
+    <div class="giving_reviews" id="review_wnd">
+        <form>
+            <input type="text" name="review" placeholder="Write your review..." required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+
+<!-- SHOP SECTION -->
+<section id="shop">
+    <h1>Shop</h1>
+
+    <div class="steps">
+
+        <div class="step">
+            <img src="images/pic5.jpeg">
+            <h3>Photo Frame</h3>
+            <p>₹599</p>
+            <button onclick="addToCart('Photo Frame')">Add to Cart</button>
+        </div>
+
+        <div class="step">
+            <img src="images/pic6.jpeg">
+            <h3>Printed Album</h3>
+            <p>₹899</p>
+            <button onclick="addToCart('Printed Album')">Add to Cart</button>
+        </div>
+
+        <div class="step">
+            <img src="images/pic7.jpeg">
+            <h3>Canvas Print</h3>
+            <p>₹799</p>
+            <button onclick="addToCart('Canvas Print')">Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <h1>Reach Out To Us</h1>
+    <a href="mailto:petstudio@gmail.com">email</a>
+    <p>Phone number: 99XXXXXX99</p>
+</footer>
+
+</body>
+</html>

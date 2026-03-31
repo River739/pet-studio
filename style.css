@@ -1,0 +1,170 @@
+html {
+    scroll-padding-top: 200px;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* NAVBAR */
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+nav ul li {
+    cursor: pointer;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    background: url("images/Background_pic.png") no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+}
+
+/* SECTIONS */
+section {
+    padding: 30px;
+    text-align: center;
+}
+
+/* GRID */
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* CARD */
+.step {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: 0.3s;
+    background-color: white;
+}
+
+.step img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* HOVER EFFECT */
+.step:hover {
+    transform: scale(1.05);
+}
+
+/* TABLE */
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* FORM */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+    margin: auto;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* FIELDSET */
+fieldset {
+    border: 1px solid #aaa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+/* BUTTON */
+button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+    margin-top: 8px;
+    padding: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* REVIEW INPUT */
+.giving_reviews input {
+    padding: 8px;
+    width: 250px;
+}
+
+/* CANVAS */
+#offerCanvas {
+    display: block;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+}

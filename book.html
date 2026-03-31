@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Session | Pet Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script src="script.js"></script>
+
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="main.html#hero">Home</a></li>
+            <li><a href="main.html#Price">Packages</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="book" id="book">
+    <h2>Book a Session</h2>
+    <p>Fill in the details and we’ll get back to you shortly</p>
+
+    <form class="booking-form" id="bookingForm">
+
+        <!-- OWNER DETAILS -->
+        <fieldset>
+            <legend>Owner Details</legend>
+
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+        </fieldset>
+
+        <!-- PET DETAILS -->
+        <fieldset>
+            <legend>Pet Details</legend>
+
+            <input type="text" name="petName" placeholder="Pet Name">
+
+            <p>Pet Type:</p>
+            <input type="radio" name="petType" value="Dog"> Dog
+            <input type="radio" name="petType" value="Cat"> Cat
+            <input type="radio" name="petType" value="Other"> Other
+        </fieldset>
+
+        <!-- PACKAGE -->
+        <fieldset>
+            <legend>Package Selection</legend>
+
+            <select name="package" required>
+                <option value="">Select Package</option>
+                <option value="Mini">Mini Shoot</option>
+                <option value="Full">Full Shoot</option>
+                <option value="Premium">Premium</option>
+            </select>
+
+            <input type="date" name="date" required>
+        </fieldset>
+
+        <!-- ADD-ONS -->
+        <fieldset>
+            <legend>Add-ons</legend>
+
+            <input type="checkbox" name="addons" value="photos"> Extra Edited Photos <br>
+            <input type="checkbox" name="addons" value="album"> Printed Album <br>
+            <input type="checkbox" name="addons" value="outdoor"> Outdoor Shoot
+        </fieldset>
+
+        <!-- TEXTAREA -->
+        <textarea name="notes" placeholder="Anything we should know about your pet?" rows="4"></textarea>
+
+        <!-- BUTTONS -->
+        <button type="submit">Book Now</button>
+        <button type="reset">Reset</button>
+
+    </form>
+</section>
+
+</body>
+</html>
