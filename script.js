@@ -9,11 +9,11 @@ window.onload = function () {
 
     if (canvas) {
         const ctx = canvas.getContext("2d");
+        canvas.width = canvas.offsetWidth || 1000;
 
         let endTime = new Date().getTime() + (1 * 60 * 1000);
 
         function drawBanner() {
-
             let now = new Date().getTime();
             let timeLeft = endTime - now;
 
@@ -22,22 +22,25 @@ window.onload = function () {
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = "#ffcccb";
+            // Warm amber gradient background
+            let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, "#c67c3a");
+            gradient.addColorStop(1, "#e8a96a");
+            ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = "#000";
-            ctx.font = "20px Arial";
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "500 14px 'DM Sans', Arial, sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
 
-            let text = "Limited Offer! Price reduced by 10% | Ends in: "
-                        + minutes + "m " + seconds + "s";
+            let text = timeLeft > 0
+                ? " Limited Offer! Prices reduced by 10%  —  Ends in: " + minutes + "m " + seconds + "s"
+                : "Offer Expired!";
 
-            ctx.fillText(text, 50, 40);
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
 
-            if (timeLeft <= 0) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillText("Offer Expired!", 50, 40);
-                return;
-            }
+            if (timeLeft <= 0) return;
 
             setTimeout(drawBanner, 1000);
         }
@@ -52,67 +55,48 @@ window.onload = function () {
 
     const reviewForm = document.querySelector("#review_wnd form");
 
-    // Function to add review to page
     function addReviewToPage(value) {
         let newDiv = document.createElement("div");
         newDiv.className = "step";
 
         newDiv.innerHTML = `
-            <img src="images/pic1.png">
-            <h3>YOU</h3>
+            <img src="images/pic1.png" alt="reviewer">
+            <h3>You</h3>
             <p>"${value}"</p>
             <button class="delete-btn">Delete</button>
         `;
 
         document.querySelector(".reviews .steps").appendChild(newDiv);
 
-        // Delete button
         newDiv.querySelector(".delete-btn").addEventListener("click", function () {
             newDiv.remove();
             deleteFromStorage(value);
         });
     }
 
-    // Delete from localStorage
     function deleteFromStorage(value) {
         let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-        reviews = reviews.filter(function (item) {
-            return item !== value;
-        });
-
+        reviews = reviews.filter(function (item) { return item !== value; });
         localStorage.setItem("reviews", JSON.stringify(reviews));
     }
 
-    // Load saved reviews
     let savedReviews = localStorage.getItem("reviews");
-
     if (savedReviews) {
-        let reviewsArray = JSON.parse(savedReviews);
-
-        reviewsArray.forEach(function (text) {
-            addReviewToPage(text);
-        });
+        JSON.parse(savedReviews).forEach(function (text) { addReviewToPage(text); });
     }
 
-    // Submit review
     if (reviewForm) {
         reviewForm.addEventListener("submit", function (e) {
             e.preventDefault();
-
             let input = reviewForm.querySelector("input[name='review']");
-            let value = input.value;
-
+            let value = input.value.trim();
             if (value === "") return;
 
             addReviewToPage(value);
 
-            // Save to storage
-            let reviews = localStorage.getItem("reviews");
-            let reviewsArray = reviews ? JSON.parse(reviews) : [];
-
-            reviewsArray.push(value);
-            localStorage.setItem("reviews", JSON.stringify(reviewsArray));
+            let reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+            reviews.push(value);
+            localStorage.setItem("reviews", JSON.stringify(reviews));
 
             reviewForm.reset();
             input.focus();
@@ -127,15 +111,12 @@ window.onload = function () {
     const steps = document.querySelectorAll(".step");
 
     steps.forEach(function (box) {
-
         box.addEventListener("mouseover", function () {
-            box.style.backgroundColor = "#f0f0f0";
+            box.style.backgroundColor = "#fff8f3";
         });
-
         box.addEventListener("mouseout", function () {
             box.style.backgroundColor = "white";
         });
-
     });
 
 
@@ -146,26 +127,25 @@ window.onload = function () {
     const bookingForm = document.getElementById("bookingForm");
 
     if (bookingForm) {
-
         let inputs = bookingForm.querySelectorAll("input, select, textarea");
 
         inputs.forEach(function (field) {
-
             field.addEventListener("change", function () {
-                field.style.border = "2px solid green";
+                if (field.type !== "radio" && field.type !== "checkbox") {
+                    field.style.border = "2px solid #c67c3a";
+                }
             });
 
             field.addEventListener("focus", function () {
-                field.style.backgroundColor = "#e6f7ff";
+                if (field.type !== "radio" && field.type !== "checkbox") {
+                    field.style.backgroundColor = "#fff8f3";
+                }
             });
-
         });
 
         bookingForm.addEventListener("submit", function (e) {
             e.preventDefault();
-
-            alert("Booking Submitted Successfully!");
-
+            alert("Booking Submitted Successfully! We'll be in touch soon. 🐾");
             bookingForm.reset();
         });
     }
@@ -178,5 +158,5 @@ window.onload = function () {
 ========================= */
 
 function addToCart(item) {
-    alert(item + " added to cart!");
+    alert(item + " added to cart! 🛒");
 }
