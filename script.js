@@ -11,7 +11,10 @@ window.onload = function () {
         const ctx = canvas.getContext("2d");
         canvas.width = canvas.offsetWidth || 1000;
 
-        let endTime = new Date().getTime() + (1 * 60 * 1000);
+        const savedEnd = parseInt(localStorage.getItem("offerEndTime") || "0");
+        window.offerEndTime = savedEnd > new Date().getTime() ? savedEnd : new Date().getTime() + (5 * 60 * 1000);
+        if (!savedEnd || savedEnd <= new Date().getTime()) localStorage.setItem("offerEndTime", window.offerEndTime);
+        let endTime = window.offerEndTime;
 
         function drawBanner() {
             let now = new Date().getTime();
@@ -164,7 +167,11 @@ window.onload = function () {
 
             const basePrice   = packagePrices[pkg] || 0;
             const addonTotal  = addons.reduce((sum, a) => sum + (addonPrices[a] || 0), 0);
-            const totalPrice  = basePrice + addonTotal;
+            const subtotal    = basePrice + addonTotal;
+            const offerEndTime = window.offerEndTime || parseInt(localStorage.getItem("offerEndTime") || "0");
+            const offerActive = window.offerEndTime && new Date().getTime() < offerEndTime;
+            const discount    = offerActive ? Math.round(subtotal * 0.10) : 0;
+            const totalPrice  = subtotal - discount;
 
             const bookingRef  = "PS-" + Date.now().toString().slice(-6);
             const formattedDate = date ? new Date(date + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "—";
@@ -210,6 +217,7 @@ window.onload = function () {
                     <div class="receipt-grid">
                         <div class="receipt-row"><span>${pkg} Shoot</span><span>&#8377;${basePrice.toLocaleString("en-IN")}</span></div>
                         ${addonRows}
+                        ${offerActive ? `<div class="receipt-row receipt-discount"><span>10% Offer Discount</span><span>- &#8377;${discount.toLocaleString("en-IN")}</span></div>` : ""}
                         <div class="receipt-row receipt-total"><span>Total</span><span>&#8377;${totalPrice.toLocaleString("en-IN")}</span></div>
                     </div>
 

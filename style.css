@@ -893,6 +893,16 @@ legend {
     font-style: italic;
 }
 
+.receipt-row.receipt-discount {
+    background: #f0faf0;
+    color: #4a7c4e;
+}
+
+.receipt-row.receipt-discount span:last-child {
+    color: #3a7a40;
+    font-weight: 500;
+}
+
 .receipt-row.receipt-total {
     background: var(--cream);
     font-weight: 500;
