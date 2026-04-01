@@ -1,4 +1,4 @@
-
+// Run after page loads
 window.onload = function () {
 
     /* =========================
@@ -145,8 +145,99 @@ window.onload = function () {
 
         bookingForm.addEventListener("submit", function (e) {
             e.preventDefault();
+
+            // Collect form data
+            const data = new FormData(bookingForm);
+            const name     = data.get("name") || "—";
+            const email    = data.get("email") || "—";
+            const phone    = data.get("phone") || "—";
+            const petName  = data.get("petName") || "—";
+            const petType  = data.get("petType") || "—";
+            const pkg      = data.get("package") || "—";
+            const date     = data.get("date") || "—";
+            const notes    = data.get("notes") || "None";
+            const addons   = data.getAll("addons");
+
+            const packagePrices = { Mini: 5500, Full: 8000, Premium: 14000 };
+            const addonLabels   = { photos: "Extra Edited Photos", album: "Printed Album", outdoor: "Outdoor Shoot" };
+            const addonPrices   = { photos: 500, album: 800, outdoor: 1000 };
+
+            const basePrice   = packagePrices[pkg] || 0;
+            const addonTotal  = addons.reduce((sum, a) => sum + (addonPrices[a] || 0), 0);
+            const totalPrice  = basePrice + addonTotal;
+
+            const bookingRef  = "PS-" + Date.now().toString().slice(-6);
+            const formattedDate = date ? new Date(date + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "—";
+
             alert("Booking Submitted Successfully! We'll be in touch soon. 🐾");
+
+            // Build receipt HTML
+            const addonRows = addons.length > 0
+                ? addons.map(a => `
+                    <div class="receipt-row">
+                        <span>${addonLabels[a] || a}</span>
+                        <span>+ &#8377;${(addonPrices[a] || 0).toLocaleString("en-IN")}</span>
+                    </div>`).join("")
+                : `<div class="receipt-row muted"><span>No add-ons selected</span><span></span></div>`;
+
+            const receiptHTML = `
+            <div class="receipt-overlay" id="receiptOverlay">
+                <div class="receipt-modal">
+                    <div class="receipt-header">
+                        <div class="receipt-paw">🐾</div>
+                        <h2>Booking Confirmed</h2>
+                        <p class="receipt-sub">Thank you, ${name.split(" ")[0]}! We'll be in touch soon.</p>
+                        <div class="receipt-ref">Ref # ${bookingRef}</div>
+                    </div>
+
+                    <div class="receipt-section-label">Session Details</div>
+                    <div class="receipt-grid">
+                        <div class="receipt-row"><span>Date</span><span>${formattedDate}</span></div>
+                        <div class="receipt-row"><span>Package</span><span>${pkg} Shoot</span></div>
+                        <div class="receipt-row"><span>Pet</span><span>${petName} (${petType})</span></div>
+                    </div>
+
+                    <div class="receipt-section-label">Owner Details</div>
+                    <div class="receipt-grid">
+                        <div class="receipt-row"><span>Name</span><span>${name}</span></div>
+                        <div class="receipt-row"><span>Email</span><span>${email}</span></div>
+                        <div class="receipt-row"><span>Phone</span><span>${phone}</span></div>
+                    </div>
+
+                    ${notes !== "None" ? `<div class="receipt-section-label">Notes</div><div class="receipt-notes">${notes}</div>` : ""}
+
+                    <div class="receipt-section-label">Pricing</div>
+                    <div class="receipt-grid">
+                        <div class="receipt-row"><span>${pkg} Shoot</span><span>&#8377;${basePrice.toLocaleString("en-IN")}</span></div>
+                        ${addonRows}
+                        <div class="receipt-row receipt-total"><span>Total</span><span>&#8377;${totalPrice.toLocaleString("en-IN")}</span></div>
+                    </div>
+
+                    <p class="receipt-note">A confirmation will be sent to <strong>${email}</strong>. Payment is due on session day.</p>
+
+                    <div class="receipt-actions">
+                        <button class="receipt-print-btn" onclick="window.print()">Print Receipt</button>
+                        <button class="receipt-close-btn" id="receiptCloseBtn">Done</button>
+                    </div>
+                </div>
+            </div>`;
+
+            document.body.insertAdjacentHTML("beforeend", receiptHTML);
+
+            document.getElementById("receiptCloseBtn").addEventListener("click", function () {
+                document.getElementById("receiptOverlay").remove();
+            });
+            document.getElementById("receiptOverlay").addEventListener("click", function (e) {
+                if (e.target === this) this.remove();
+            });
+
             bookingForm.reset();
+
+            // Reset field styles
+            bookingForm.querySelectorAll("input, select, textarea").forEach(function (f) {
+                f.style.border = "";
+                f.style.backgroundColor = "";
+            });
         });
     }
 
