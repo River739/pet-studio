@@ -1,4 +1,4 @@
-// Run after page loads
+
 window.onload = function () {
 
     /* =========================
