@@ -169,7 +169,7 @@ window.onload = function () {
             const addonTotal  = addons.reduce((sum, a) => sum + (addonPrices[a] || 0), 0);
             const subtotal    = basePrice + addonTotal;
             const offerEndTime = window.offerEndTime || parseInt(localStorage.getItem("offerEndTime") || "0");
-            const offerActive = window.offerEndTime && new Date().getTime() < offerEndTime;
+            const offerActive = offerEndTime && new Date().getTime() < offerEndTime;
             const discount    = offerActive ? Math.round(subtotal * 0.10) : 0;
             const totalPrice  = subtotal - discount;
 
